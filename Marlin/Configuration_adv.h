@@ -459,9 +459,9 @@
  * off (or reduces to idle speed) shortly after drivers are turned off.
  *
  */
-//#define USE_CONTROLLER_FAN
+#define USE_CONTROLLER_FAN
 #if ENABLED(USE_CONTROLLER_FAN)
-  #define CONTROLLER_FAN_PIN P2_00
+  #define CONTROLLER_FAN_PIN P1_00
           // Set a custom pin for the controller fan
   //#define CONTROLLER_FAN_USE_Z_ONLY    // With this option only the Z axis is considered
   //#define CONTROLLER_FAN_IGNORE_Z      // Ignore Z stepper. Useful when stepper timeout is disabled.
@@ -551,7 +551,7 @@
 #define COOLER_AUTO_FAN_PIN -1
 #define COOLER_FAN_PIN -1
 
-#define EXTRUDER_AUTO_FAN_TEMPERATURE 50
+#define EXTRUDER_AUTO_FAN_TEMPERATURE 70
 #define EXTRUDER_AUTO_FAN_SPEED 255   // 255 == full speed
 #define CHAMBER_AUTO_FAN_TEMPERATURE 30
 #define CHAMBER_AUTO_FAN_SPEED 255
@@ -791,7 +791,7 @@
    * differs, a mode set eeprom write will be completed at initialization.
    * Use the option below to force an eeprom write to a V3.1 probe regardless.
    */
-  //#define BLTOUCH_SET_5V_MODE
+  #define BLTOUCH_SET_5V_MODE
 
   /**
    * Safety: Activate if connecting a probe with an unknown voltage mode.
@@ -807,7 +807,7 @@
    * This feature was designed for Deltabots with very fast Z moves; however, higher speed Cartesians
    * might be able to use it. If the machine can't raise Z fast enough the BLTouch may go into ALARM.
    */
-  //#define BLTOUCH_HS_MODE
+  #define BLTOUCH_HS_MODE
 
   // Safety: Enable voltage mode settings in the LCD menu.
   //#define BLTOUCH_LCD_VOLTAGE_MENU
@@ -825,7 +825,7 @@
   // Define probe X and Y positions for Z1, Z2 [, Z3 [, Z4]]
   // If not defined, probe limits will be used.
   // Override with 'M422 S<index> X<pos> Y<pos>'
-  #define Z_STEPPER_ALIGN_XY { {  40, 90 }, { 230,  90 } }
+  //#define Z_STEPPER_ALIGN_XY { {  50, 100 }, { 200,  100 } }
 
   /**
    * Orientation for the automatically-calculated probe positions.
@@ -1156,22 +1156,22 @@
 
   // Add Probe Z Offset calibration to the Z Probe Offsets menu
   #if HAS_BED_PROBE
-    //#define PROBE_OFFSET_WIZARD
+    #define PROBE_OFFSET_WIZARD
     #if ENABLED(PROBE_OFFSET_WIZARD)
       //
       // Enable to init the Probe Z-Offset when starting the Wizard.
       // Use a height slightly above the estimated nozzle-to-probe Z offset.
       // For example, with an offset of -5, consider a starting height of -4.
       //
-      //#define PROBE_OFFSET_WIZARD_START_Z -4.0
+      #define PROBE_OFFSET_WIZARD_START_Z -4.0
 
       // Set a convenient position to do the calibration (probing point and nozzle/bed-distance)
-      //#define PROBE_OFFSET_WIZARD_XY_POS { X_CENTER, Y_CENTER }
+      #define PROBE_OFFSET_WIZARD_XY_POS { X_CENTER, Y_CENTER }
     #endif
   #endif
 
   // Include a page of printer information in the LCD Main Menu
-  //#define LCD_INFO_MENU
+  #define LCD_INFO_MENU
   #if ENABLED(LCD_INFO_MENU)
     //#define LCD_PRINTER_INFO_IS_BOOTSCREEN // Show bootscreen(s) instead of Printer Info pages
   #endif
@@ -1186,7 +1186,7 @@
    * LED Control Menu
    * Add LED Control to the LCD menu
    */
-  //#define LED_CONTROL_MENU
+  #define LED_CONTROL_MENU
   #if ENABLED(LED_CONTROL_MENU)
     #define LED_COLOR_PRESETS                 // Enable the Preset Color menu option
     //#define NEO2_COLOR_PRESETS              // Enable a second NeoPixel Preset Color menu option
@@ -1209,7 +1209,7 @@
   #endif
 
   // Insert a menu for preheating at the top level to allow for quick access
-  //#define PREHEAT_SHORTCUT_MENU_ITEM
+  #define PREHEAT_SHORTCUT_MENU_ITEM
 
 #endif // HAS_LCD_MENU
 
@@ -1225,16 +1225,16 @@
   #endif
 
   // Scroll a longer status message into view
-  //#define STATUS_MESSAGE_SCROLLING
+  #define STATUS_MESSAGE_SCROLLING
 
   // On the Info Screen, display XY with one decimal place when possible
-  //#define LCD_DECIMAL_SMALL_XY
+  #define LCD_DECIMAL_SMALL_XY
 
   // Add an 'M73' G-code to set the current percentage
-  //#define LCD_SET_PROGRESS_MANUALLY
+  #define LCD_SET_PROGRESS_MANUALLY
 
   // Show the E position (filament used) during printing
-  //#define LCD_SHOW_E_TOTAL
+  #define LCD_SHOW_E_TOTAL
 #endif
 
 #if EITHER(SDSUPPORT, LCD_SET_PROGRESS_MANUALLY) && ANY(HAS_MARLINUI_U8GLIB, HAS_MARLINUI_HD44780, IS_TFTGLCD_PANEL, EXTENSIBLE_UI)
@@ -1314,7 +1314,7 @@
    * If the machine reboots when resuming a print you may need to replace or
    * reformat the SD card. (Bad sectors delay startup triggering the watchdog.)
    */
-  #define POWER_LOSS_RECOVERY
+  //#define POWER_LOSS_RECOVERY
   #if ENABLED(POWER_LOSS_RECOVERY)
     #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
     //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
@@ -1781,7 +1781,7 @@
   #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
     //#define BABYSTEP_HOTEND_Z_OFFSET      // For multiple hotends, babystep relative Z offsets
-    //#define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor
+    #define BABYSTEP_ZPROBE_GFX_OVERLAY   // Enable graphical overlay on Z-offset editor
   #endif
 #endif
 
@@ -1807,7 +1807,7 @@
   //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
   #define LIN_ADVANCE_K 0.00    // Unit: mm compression per 1mm/s extruder speed
   //#define LA_DEBUG            // If enabled, this will generate debug information output over USB.
-  #define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration
+  //#define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration
 #endif
 
 // @section leveling
@@ -1889,7 +1889,7 @@
  */
 #if HAS_BED_PROBE && TEMP_SENSOR_PROBE && TEMP_SENSOR_BED
   // Enable thermal first layer compensation using bed and probe temperatures
-  #define PROBE_TEMP_COMPENSATION
+  //#define PROBE_TEMP_COMPENSATION
 
   // Add additional compensation depending on hotend temperature
   // Note: this values cannot be calibrated and have to be set manually
@@ -2456,8 +2456,8 @@
   #endif
 
   #if AXIS_IS_TMC(Y)
-    #define Y_CURRENT        600
-    #define Y_CURRENT_HOME   400
+    #define Y_CURRENT        800
+    #define Y_CURRENT_HOME   Y_CURRENT
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
     #define Y_CHAIN_POS      -1
@@ -2664,16 +2664,16 @@
    * Define your own with:
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-  #define CHOPPER_TIMING CHOPPER_DEFAULT_24V        // All axes (override below)
-  //#define CHOPPER_TIMING_X  CHOPPER_DEFAULT_12V   // For X Axes (override below)
+  //#define CHOPPER_TIMING CHOPPER_DEFAULT_24V        // All axes (override below)
+  #define CHOPPER_TIMING_X  CHOPPER_DEFAULT_24V   // For X Axes (override below)
   //#define CHOPPER_TIMING_X2 CHOPPER_DEFAULT_12V
-  //#define CHOPPER_TIMING_Y  CHOPPER_DEFAULT_12V   // For Y Axes (override below)
+  #define CHOPPER_TIMING_Y  CHOPPER_DEFAULT_24V   // For Y Axes (override below)
   //#define CHOPPER_TIMING_Y2 CHOPPER_DEFAULT_12V
-  //#define CHOPPER_TIMING_Z  CHOPPER_DEFAULT_12V   // For Z Axes (override below)
-  //#define CHOPPER_TIMING_Z2 CHOPPER_DEFAULT_12V
+  #define CHOPPER_TIMING_Z  CHOPPER_DEFAULT_24V   // For Z Axes (override below)
+  #define CHOPPER_TIMING_Z2 CHOPPER_DEFAULT_24V
   //#define CHOPPER_TIMING_Z3 CHOPPER_DEFAULT_12V
   //#define CHOPPER_TIMING_Z4 CHOPPER_DEFAULT_12V
-  //#define CHOPPER_TIMING_E  CHOPPER_DEFAULT_12V   // For Extruders (override below)
+  #define CHOPPER_TIMING_E  CHOPPER_09STEP_24V   // For Extruders (override below)
   //#define CHOPPER_TIMING_E1 CHOPPER_DEFAULT_12V
   //#define CHOPPER_TIMING_E2 CHOPPER_DEFAULT_12V
   //#define CHOPPER_TIMING_E3 CHOPPER_DEFAULT_12V
@@ -3449,7 +3449,7 @@
  * User-defined menu items to run custom G-code.
  * Up to 25 may be defined, but the actual number is LCD-dependent.
  */
-#define CUSTOM_USER_MENUS
+//#define CUSTOM_USER_MENUS
 #if ENABLED(CUSTOM_USER_MENUS)
   #define CUSTOM_USER_MENU_TITLE "Custom Commands"
   #define USER_SCRIPT_DONE "M117 User Script Done"
@@ -3477,26 +3477,26 @@
   #define USER_DESC_7 "Disable Cold Extrusion"
   #define USER_GCODE_7 "M302 P0"
 
-  #define USER_DESC_8 "Probe UBL Slot 1" //Use probe to setup UBL.
-  #define USER_GCODE_8 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 1"
+  //#define USER_DESC_8 "Probe UBL Slot 1" //Use probe to setup UBL.
+  //#define USER_GCODE_8 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 1"
 
-  #define USER_DESC_9 "Probe UBL Slot 2" //Use probe to setup UBL.
-  #define USER_GCODE_9 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 2"
+  //#define USER_DESC_9 "Probe UBL Slot 2" //Use probe to setup UBL.
+  //#define USER_GCODE_9 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 2"
 
-  #define USER_DESC_10 "Probe UBL Slot 3" //Use probe to setup UBL.
-  #define USER_GCODE_10 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S3\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 3"
+  //#define USER_DESC_10 "Probe UBL Slot 3" //Use probe to setup UBL.
+  //#define USER_GCODE_10 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S3\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 3"
 
-  #define USER_DESC_11 "Probe UBL Slot 4" //Use probe to setup UBL.
-  #define USER_GCODE_11 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S4\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 4"
+  //#define USER_DESC_11 "Probe UBL Slot 4" //Use probe to setup UBL.
+  //#define USER_GCODE_11 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S4\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 4"
 
-  #define USER_DESC_12 "Probe UBL Slot 5" //Use probe to setup UBL.
-  #define USER_GCODE_12 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S5\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 5"
+  //#define USER_DESC_12 "Probe UBL Slot 5" //Use probe to setup UBL.
+  //#define USER_GCODE_12 "G28\nG1 X0.00 Y0.00 F3000\nM190 S65\nG29 P1\nG29 P3\nG29 S5\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 5"
 
-  #define USER_DESC_13 "UBL Offset Step 2"
-  #define USER_GCODE_13 "G28\nG1 X125 Y105 Z0.00\nM211 S0\nM0 Set Z Offset"
+  //#define USER_DESC_13 "UBL Offset Step 2"
+  //#define USER_GCODE_13 "G28\nG1 X125 Y105 Z0.00\nM211 S0\nM0 Set Z Offset"
 
-  #define USER_DESC_14 "UBL Offset Step 3"
-  #define USER_GCODE_14 "M211 S1\nM500"
+  //#define USER_DESC_14 "UBL Offset Step 3"
+  //#define USER_GCODE_14 "M211 S1\nM500"
 
   #define USER_DESC_15 "Print Mesh Validation"
   #define USER_GCODE_15 "G28\nG26\nG28"
@@ -3533,7 +3533,7 @@
  *
  * Implement M486 to allow Marlin to skip objects
  */
-//#define CANCEL_OBJECTS
+#define CANCEL_OBJECTS
 
 /**
  * I2C position encoders for closed loop control.
